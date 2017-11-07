@@ -1,3 +1,19 @@
+td, th, button, option{
+    border-radius: 5px;
+    outline: none;
+}
+
+#add-update-btn{
+    width: 80px;
+    height: 30px;
+    margin-top: 30px;
+}
+
+
+.invisible-element{
+    display: none;
+}
+
 .top-div {
     width: 500px;
     margin: auto;
@@ -156,15 +172,9 @@ td:last-child {
 
 select {
     width: 80px;
-    border: 1px black;
+    /*    border: 1px black;*/
 }
 
-#buttons-div * {
-    width: 80px;
-    height: 30px;
-    border-radius: 10px;
-    outline: none;
-}
 
 .validation-error {
     border: 1px solid red;
@@ -221,7 +231,7 @@ label {
     margin-right: 30px;
 }
 
-.countLabel {
+.count-label {
     display: inline-block;
     float: right;
     border: 1px solid black;

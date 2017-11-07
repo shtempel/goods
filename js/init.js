@@ -3,5 +3,6 @@
 var TABLEAPP = {
     main: null,
     data: null,
-    rendering: null
+    rendering: null,
+    sorting: null
 };
