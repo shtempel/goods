@@ -60,18 +60,3 @@ TABLEAPP.sorting = (function () {
 
     return sorting;
 })();
-
-
-//function sortingByPrice(json) {
-//    json.sort(function (a, b) {
-//        var x = a.price;
-//        var y = b.price;
-//        if (x < y) {
-//            return -1;
-//        }
-//        if (x > y) {
-//            return 1;
-//        }
-//        return 0;
-//    });
-//}
