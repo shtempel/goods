@@ -21,23 +21,27 @@ TABLEAPP.rendering = (function () {
             $('tbody tr').remove();
             for (var i = 0; i < dataTable.length; i++) {
                 var dataCell = $('<tr/>').attr('rowid', i + 1);
+
                 dataCell.append(
-                        $('<td/>', {
-                            class: 'name',
-                            text: dataTable[i].name,
-                            'rowId': i
-                        }).append($('<label/>', {
-                    text: dataTable[i].count,
-                    class: 'count-label'
-                })));
+                    $('<td/>', {
+                        class: 'name',
+                        'data-action': 'show-item',
+                        text: dataTable[i].name,
+                        'rowId': i
+                    }).append($('<label/>', {
+                        text: dataTable[i].count,
+                        class: 'count-label'
+                    })));
+
                 dataCell.append(
-                        $('<td/>', {
-                            class: 'price',
-                            text: (dataTable[i].price + ' $').replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ')
-                        })
-                        );
+                    $('<td/>', {
+                        class: 'price',
+                        text: (dataTable[i].price + ' $').replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ')
+                    })
+                );
+
                 dataCell.append(
-                        $('<td/>', {id: 'btns-cell'}).append(addButtonToTable('edit-btn', 'Edit', 'edit-btn', i, 'edit'),
+                    $('<td/>', {id: 'btns-cell'}).append(addButtonToTable('edit-btn', 'Edit', 'edit-btn', i, 'edit'),
                         addButtonToTable('delete-btn', 'Delete', 'delete-btn', i, 'delete')));
                 table.append(dataCell);
             }
@@ -47,4 +51,5 @@ TABLEAPP.rendering = (function () {
     render.renderTable(dataTable);
 
     return render;
+
 })();

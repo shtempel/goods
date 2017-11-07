@@ -2,8 +2,7 @@
 
 TABLEAPP.main = (function () {
     var render, sort, addNew, closeBtn, addModalDiv, deleteModalDiv, searchBtn,
-            searchInput, dataTable, tableTr, deleteBtn, yesBtn, noBtn, table,
-            sortByPrice, sortByName;
+        searchInput, dataTable, tableTr, yesBtn, noBtn, table, validation;
 
     addNew = $('#add-new-btn');
     closeBtn = $('#close');
@@ -12,16 +11,13 @@ TABLEAPP.main = (function () {
     searchBtn = $('#search-btn');
     searchInput = $('#search-input');
     table = $('table');
-    tableTr = $('#table-content tr');
-    searchInput = $('#search-input');
-    deleteBtn = $('#delete-btn');
+    tableTr = $('#table-content').find('tr');
     yesBtn = $('#yes-btn');
     noBtn = $('#no-btn');
-    sortByName = null;
-    sortByPrice = null;
     dataTable = TABLEAPP.data.goods;
     render = TABLEAPP.rendering;
     sort = TABLEAPP.sorting;
+    validation = TABLEAPP.validation;
 
     function modalToggle(id) {
         id.toggleClass('modal-visibility');
@@ -42,10 +38,9 @@ TABLEAPP.main = (function () {
         }
     });
 
-
     addNew.click(function () {
         var item, nameInputId, priceInputId, countInputId,
-                emailInputId, addUpdateBtn, optionFieldId;
+            emailInputId, addUpdateBtn, optionFieldId;
         nameInputId = $('#name-add-field');
         emailInputId = $('#email-add-field');
         countInputId = $('#count-add-field');
@@ -71,32 +66,35 @@ TABLEAPP.main = (function () {
                 price: priceInputId.val(),
                 option: optionFieldId.val()
             };
-
-            dataTable.push(item);
-            modalToggle(addModalDiv);
-            render.renderTable(dataTable);
+            if (validation.nameFieldValidation(nameInputId) && validation.emailFieldValidation(emailInputId)) {
+                dataTable.push(item);
+                modalToggle(addModalDiv);
+                render.renderTable(dataTable);
+            }
         });
     });
 
     table.click(function (e) {
         var target = e.target,
-                action = $(target).data('action');
-        if (target != this) {
-            switch (action) {
+            action = $(target).data('action');
 
-                case 'delete':
-                    deleteItem(target);
-                    break;
+        switch (action) {
 
-                case 'edit':
-                    editItem(target);
-                    break;
+            case 'delete':
+                deleteItem(target);
+                break;
 
-                case 'sorting':
-                    sorting(target);
-                    break;
-            }
-            target = target.parentNode;
+            case 'edit':
+                editItem(target);
+                break;
+
+            case 'sorting':
+                sorting(target);
+                break;
+
+            case 'show-item':
+                editItem(target);
+                break;
         }
     });
 
@@ -130,9 +128,10 @@ TABLEAPP.main = (function () {
         render.renderTable(dataTable);
     }
 
+
     function editItem(target) {
         var nameInputId, emailInputId, countInputId, priceInputId,
-                optionInputId, addUpdateBtn, id;
+            optionInputId, addUpdateBtn, id;
         addModalDiv.attr('modal-id', $(target).attr('rowId'));
         nameInputId = $('#name-add-field');
         emailInputId = $('#email-add-field');
@@ -142,7 +141,12 @@ TABLEAPP.main = (function () {
         addUpdateBtn = $('#add-update-btn');
         id = addModalDiv.attr('modal-id');
 
-        addUpdateBtn.text('Edit');
+        if ($(target).attr('data-action') === 'show-item') {
+            addUpdateBtn.css('display', 'none');
+        } else {
+            addUpdateBtn.text('Edit').css('display', 'block');
+        }
+
         modalToggle(addModalDiv);
 
         nameInputId.val(dataTable[id].name);
@@ -152,11 +156,13 @@ TABLEAPP.main = (function () {
         optionInputId.val(dataTable[id].option);
 
         addUpdateBtn.off('click').click(function () {
-            dataTable[id].name = nameInputId.val();
-            dataTable[id].email = emailInputId.val();
-            dataTable[id].count = countInputId.val();
-            dataTable[id].price = priceInputId.val();
-            dataTable[id].option = optionInputId.val();
+            if (validation.nameFieldValidation(nameInputId) && validation.emailFieldValidation(emailInputId)) {
+                dataTable[id].name = nameInputId.val();
+                dataTable[id].email = emailInputId.val();
+                dataTable[id].count = countInputId.val();
+                dataTable[id].price = priceInputId.val();
+                dataTable[id].option = optionInputId.val();
+            }
             render.renderTable(dataTable);
             modalToggle(addModalDiv);
         });
@@ -180,6 +186,10 @@ TABLEAPP.main = (function () {
 
     closeBtn.click(function () {
         modalToggle(addModalDiv);
+        $('#name-add-field').removeClass('border-error');
+        $('#name-add-field').next().removeClass('visible');
+        $('#email-add-field').removeClass('border-error');
+        $('#email-add-field').next().removeClass('visible');
     });
 
 })();

@@ -7,10 +7,5 @@ TABLEAPP.data = {
         {id: 4, name: "melon", email: "bla@mail.ru", count: 23, price: 7236, option: 2},
         {id: 5, name: "onion", email: "bla@mail.ru", count: 93, price: 76, option: 3},
         {id: 6, name: "potato", email: "bla@mail.ru", count: 23, price: 2746, option: 1}
-    ],
-    'bla': [{id: 1, name: "orange", email: "bla@mail.ru", count: 13, price: 746, option: 3}]
+    ]
 };
-
-
-
-
