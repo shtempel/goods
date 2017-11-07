@@ -1,4 +1,4 @@
-function search(input, table) {
+/*function search(input, table) {
     var filter, tr, td, i;
     filter = input.value.toUpperCase();
     tr = table.getElementsByTagName("tr");
@@ -281,4 +281,4 @@ function fillFieldsForEditModal(json, id, nameField, emailField, countField, pri
     $(countField).val(json[id].count);
     $(priceField).val(json[id].price);
     $(optionField).val(json[id].option);
-}
+}*/

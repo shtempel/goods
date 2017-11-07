@@ -62,12 +62,18 @@
     width: 300px;
 }
 
+.modal-visibility {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 1;
+}
+
 .close {
     color: #aaaaaa;
     float: right;
-    font-size: 28px;
+    font-size: 35px;
     font-weight: bold;
-    border: 1px solid black;
     height: 20px;
     width: 20px;
     text-align: center;
@@ -81,6 +87,11 @@
     cursor: pointer;
 }
 
+.add-div {
+    margin-top: 30px;
+
+}
+
 th {
     font-weight: bold;
     width: 500px;
@@ -90,11 +101,10 @@ th > div {
     display: inline-block;
 }
 
-
-.sort-arrow-div{
+.sort-arrow-div {
     display: inline-block;
     background-size: 15px;
-    background-image: url('./sort-arrow.jpg');
+    background-image: url('img/sort-arrow.jpg');
     background-repeat: no-repeat;
     background-position: right;
     width: 30%;
@@ -118,7 +128,7 @@ td:first-child {
 }
 
 .price {
-    text-align: right;    
+    text-align: right;
 }
 
 td:last-child {
@@ -136,13 +146,6 @@ td:last-child {
     margin-left: 27px;
 }
 
-/*.name-add-field,.email-add-field,.count-add-field,.price-add-field,.my-select {*/
-.normalField {
-    margin-top: 5px;
-    margin-bottom: 30px;
-    display: block;
-}
-
 #name-add-field {
     display: inline-block;
 }
@@ -153,11 +156,14 @@ td:last-child {
 
 select {
     width: 80px;
+    border: 1px black;
 }
 
-.add-update-btn {
-    display: block;
-    margin-top: 70px;
+#buttons-div * {
+    width: 80px;
+    height: 30px;
+    border-radius: 10px;
+    outline: none;
 }
 
 .validation-error {
@@ -172,7 +178,6 @@ select {
     display: inline-block;
     margin-left: 20px;
     color: red;
-    visibility: hidden;
 }
 
 label {
@@ -185,6 +190,7 @@ label {
 
 .div-class {
     margin-top: 30px;
+
 }
 
 #count-add-field::-webkit-inner-spin-button {
@@ -226,6 +232,7 @@ label {
 }
 
 input, select:focus {
-    outline: none; 
+    outline: none;
+    border-radius: 5px;
 }
 

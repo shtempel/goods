@@ -1,11 +1,4 @@
-function include(url) {
-    const script = document.createElement('script');
-    script.src = url;
-    document.getElementsByTagName('head')[0].appendChild(script);
-}
 
-include("./utils.js");
-include("./addFile.js");
 jQuery(document).ready(function () {
 
     var table, input, warningMsg;
@@ -93,4 +86,6 @@ jQuery(document).ready(function () {
     $('#no-btn').click(function () {
         document.getElementById('delete-modal-div').style.display = 'none';
     });
+
+
 });
