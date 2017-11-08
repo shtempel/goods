@@ -11,7 +11,7 @@ TABLEAPP.main = (function () {
     searchBtn = $('#search-btn');
     searchInput = $('#search-input');
     table = $('table');
-    tableTr = $('#table-content').find('tr');
+
     yesBtn = $('#yes-btn');
     noBtn = $('#no-btn');
     dataTable = TABLEAPP.data.goods;
@@ -24,7 +24,8 @@ TABLEAPP.main = (function () {
     }
 
     searchBtn.click(function () {
-        var filter, td;
+        var filter, td, tableTr;
+        tableTr = $('#table-content').find('tr');
         filter = searchInput.val().toUpperCase();
         for (var i = 0; i < tableTr.length; i++) {
             td = tableTr[i].getElementsByTagName("td")[0];
@@ -48,7 +49,7 @@ TABLEAPP.main = (function () {
         addUpdateBtn = $('#add-update-btn');
         optionFieldId = $('#select');
 
-        addUpdateBtn.text('Add');
+        addUpdateBtn.text('Add').css('display', 'block');
         nameInputId.val('');
         emailInputId.val('');
         countInputId.val('');
