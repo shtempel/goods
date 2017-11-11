@@ -13,7 +13,9 @@ TABLEAPP.main = (function () {
         dataTable = TABLEAPP.data.goods,
         render = TABLEAPP.rendering,
         sort = TABLEAPP.sorting,
-        validation = TABLEAPP.validation;
+        validation = TABLEAPP.validation,
+        nameField = $('#name-add-field'),
+        emailField = $('#email-add-field');
 
     var clickingCases = {
         delete: 'delete',
@@ -43,14 +45,13 @@ TABLEAPP.main = (function () {
     });
 
     addNew.click(function () {
-        var item, nameInputId, priceInputId, countInputId,
-            emailInputId, addUpdateBtn, optionFieldId;
-        nameInputId = $('#name-add-field');
-        emailInputId = $('#email-add-field');
-        countInputId = $('#count-add-field');
-        priceInputId = $('#price-add-field');
-        addUpdateBtn = $('#add-update-btn');
-        optionFieldId = $('#select');
+        var item,
+            nameInputId = $('#name-add-field'),
+            emailInputId = $('#email-add-field'),
+            countInputId = $('#count-add-field'),
+            priceInputId = $('#price-add-field'),
+            addUpdateBtn = $('#add-update-btn'),
+            optionFieldId = $('#select');
 
         addUpdateBtn.text('Add').css('display', 'block');
         nameInputId.val('');
@@ -70,6 +71,7 @@ TABLEAPP.main = (function () {
                 price: priceInputId.val(),
                 option: optionFieldId.val()
             };
+
             if (validation.nameFieldValidation(nameInputId) && validation.emailFieldValidation(emailInputId)) {
                 dataTable.push(item);
                 modalToggle(addModalDiv);
@@ -103,12 +105,12 @@ TABLEAPP.main = (function () {
     });
 
     function sorting(target) {
-        var type, sortName, sortPrice, sortNameArrowId, sortPriceArrowId;
-        type = $(target).attr('id');
-        sortNameArrowId = $('#sort-name-arrow');
-        sortPriceArrowId = $('#sort-price-arrow');
-        sortName = 'sort-name-arrow';
-        sortPrice = 'sort-price-arrow';
+        var
+            type = $(target).attr('id'),
+            sortNameArrowId = $('#sort-name-arrow'),
+            sortPriceArrowId = $('#sort-price-arrow'),
+            sortName = 'sort-name-arrow',
+            sortPrice = 'sort-price-arrow';
 
         if (type === sortName) {
             if (!sortNameArrowId.hasClass('sort-arrow-div-clicked')) {
@@ -134,16 +136,17 @@ TABLEAPP.main = (function () {
 
 
     function editItem(target) {
-        var nameInputId, emailInputId, countInputId, priceInputId,
-            optionInputId, addUpdateBtn, id;
+
         addModalDiv.attr('modal-id', $(target).attr('rowId'));
-        nameInputId = $('#name-add-field');
-        emailInputId = $('#email-add-field');
-        countInputId = $('#count-add-field');
-        priceInputId = $('#price-add-field');
-        optionInputId = $('#select');
-        addUpdateBtn = $('#add-update-btn');
-        id = addModalDiv.attr('modal-id');
+
+        var nameInputId = $('#name-add-field'),
+            emailInputId = $('#email-add-field'),
+            countInputId = $('#count-add-field'),
+            priceInputId = $('#price-add-field'),
+            optionInputId = $('#select'),
+            addUpdateBtn = $('#add-update-btn'),
+            id = addModalDiv.attr('modal-id');
+
 
         if ($(target).attr('data-action') === 'show-item') {
             addUpdateBtn.css('display', 'none');
@@ -190,10 +193,8 @@ TABLEAPP.main = (function () {
 
     closeBtn.click(function () {
         modalToggle(addModalDiv);
-        $('#name-add-field').removeClass('border-error');
-        $('#name-add-field').next().removeClass('visible');
-        $('#email-add-field').removeClass('border-error');
-        $('#email-add-field').next().removeClass('visible');
+        nameField.removeClass('border-error').next().removeClass('visible');
+        emailField.removeClass('border-error').next().removeClass('visible');
     });
 
 })();

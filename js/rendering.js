@@ -3,7 +3,7 @@
 TABLEAPP.rendering = (function () {
     var dataTable = TABLEAPP.data.goods,
         render,
-        tbody = $('<tbody>', {id: 'table-content'});
+        tableBody = $('<tbody>', {id: 'table-content'});
 
     function addButtonToTable(buttonId, text, className, rowId, dataAction) {
         return $('<button/>', {
@@ -42,9 +42,9 @@ TABLEAPP.rendering = (function () {
                 dataCell.append(
                     $('<td/>', {id: 'btns-cell'}).append(addButtonToTable('edit-btn', 'Edit', 'edit-btn', i, 'edit'),
                         addButtonToTable('delete-btn', 'Delete', 'delete-btn', i, 'delete')));
-                tbody.append(dataCell);
+                tableBody.append(dataCell);
             }
-            $('.table').append(tbody);
+            $('.table').append(tableBody);
         }
     };
 
