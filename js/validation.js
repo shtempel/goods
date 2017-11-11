@@ -1,9 +1,9 @@
 'use strict';
 
 TABLEAPP.validation = (function () {
-    var nameFieldId, emailFieldId, validExp;
-    nameFieldId = $('#name-add-field');
-    emailFieldId = $('#email-add-field');
+    var nameFieldId = $('#name-add-field'),
+        emailFieldId = $('#email-add-field');
+
     var validation = {
 
         showErrors: function (type) {
@@ -60,9 +60,6 @@ TABLEAPP.validation = (function () {
         }).blur(function () {
             validation.emailFieldValidation('#email-add-field');
         });
-
-        $('#')
-
     })();
 
     return validation;

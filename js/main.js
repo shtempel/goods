@@ -1,23 +1,26 @@
 'use strict';
 
 TABLEAPP.main = (function () {
-    var render, sort, addNew, closeBtn, addModalDiv, deleteModalDiv, searchBtn,
-        searchInput, dataTable, tableTr, yesBtn, noBtn, table, validation;
+    var addNew = $('#add-new-btn'),
+        closeBtn = $('#close'),
+        addModalDiv = $('#modal-div'),
+        deleteModalDiv = $('#delete-modal-div'),
+        searchBtn = $('#search-btn'),
+        searchInput = $('#search-input'),
+        table = $('table'),
+        yesBtn = $('#yes-btn'),
+        noBtn = $('#no-btn'),
+        dataTable = TABLEAPP.data.goods,
+        render = TABLEAPP.rendering,
+        sort = TABLEAPP.sorting,
+        validation = TABLEAPP.validation;
 
-    addNew = $('#add-new-btn');
-    closeBtn = $('#close');
-    addModalDiv = $('#modal-div');
-    deleteModalDiv = $('#delete-modal-div');
-    searchBtn = $('#search-btn');
-    searchInput = $('#search-input');
-    table = $('table');
-
-    yesBtn = $('#yes-btn');
-    noBtn = $('#no-btn');
-    dataTable = TABLEAPP.data.goods;
-    render = TABLEAPP.rendering;
-    sort = TABLEAPP.sorting;
-    validation = TABLEAPP.validation;
+    var clickingCases = {
+        delete: 'delete',
+        edit: 'edit',
+        sorting: 'sorting',
+        show: 'show-item'
+    };
 
     function modalToggle(id) {
         id.toggleClass('modal-visibility');
@@ -81,19 +84,19 @@ TABLEAPP.main = (function () {
 
         switch (action) {
 
-            case 'delete':
+            case clickingCases.delete:
                 deleteItem(target);
                 break;
 
-            case 'edit':
+            case clickingCases.edit:
                 editItem(target);
                 break;
 
-            case 'sorting':
+            case clickingCases.sorting:
                 sorting(target);
                 break;
 
-            case 'show-item':
+            case clickingCases.show:
                 editItem(target);
                 break;
         }

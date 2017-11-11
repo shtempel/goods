@@ -1,3 +1,5 @@
+'use strict';
+
 TABLEAPP.data = {
     'goods': [
         {id: 0, name: "apple", email: "bla@mail.ru", count: 3, price: 746, option: 2},

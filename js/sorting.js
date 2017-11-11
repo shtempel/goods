@@ -33,29 +33,13 @@ TABLEAPP.sorting = (function () {
 
         priceSorting: function (json) {
             json.sort(function (a, b) {
-                var x = a.price;
-                var y = b.price;
-                if (x < y) {
-                    return -1;
-                }
-                if (x > y) {
-                    return 1;
-                }
-                return 0;
+                return a.price - b.price;
             });
         },
 
         priceReverseSorting: function (json) {
             json.sort(function (a, b) {
-                var x = a.price;
-                var y = b.price;
-                if (x > y) {
-                    return -1;
-                }
-                if (x < y) {
-                    return 1;
-                }
-                return 0;
+                return b.price - a.price;
             });
         }
 

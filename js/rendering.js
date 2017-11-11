@@ -1,10 +1,9 @@
 'use strict';
 
 TABLEAPP.rendering = (function () {
-    var dataTable, table, render;
-    dataTable = TABLEAPP.data.goods;
-    table = $('#table-content');
-
+    var dataTable = TABLEAPP.data.goods,
+        render,
+        tbody = $('<tbody>', {id: 'table-content'});
 
     function addButtonToTable(buttonId, text, className, rowId, dataAction) {
         return $('<button/>', {
@@ -43,8 +42,9 @@ TABLEAPP.rendering = (function () {
                 dataCell.append(
                     $('<td/>', {id: 'btns-cell'}).append(addButtonToTable('edit-btn', 'Edit', 'edit-btn', i, 'edit'),
                         addButtonToTable('delete-btn', 'Delete', 'delete-btn', i, 'delete')));
-                table.append(dataCell);
+                tbody.append(dataCell);
             }
+            $('.table').append(tbody);
         }
     };
 
