@@ -75,6 +75,7 @@ TABLEAPP.main = (function () {
             if (validation.nameFieldValidation(nameInputId) && validation.emailFieldValidation(emailInputId)) {
                 dataTable.push(item);
                 modalToggle(addModalDiv);
+                jsonInit();
                 render.renderTable(dataTable);
             }
         });
@@ -137,7 +138,7 @@ TABLEAPP.main = (function () {
 
     function editItem(target) {
 
-        addModalDiv.attr('modal-id', $(target).attr('rowId'));
+        addModalDiv.attr('modal-id', $(target).attr('row-id'));
 
         var nameInputId = $('#name-add-field'),
             emailInputId = $('#email-add-field'),
@@ -177,12 +178,13 @@ TABLEAPP.main = (function () {
 
     function deleteItem(target) {
         modalToggle(deleteModalDiv);
-        deleteModalDiv.attr('modal-id', $(target).attr('rowId'));
+        deleteModalDiv.attr('modal-id', $(target).attr('row-id'));
 
         yesBtn.off('click').click(function () {
             modalToggle(deleteModalDiv);
             var t = deleteModalDiv.attr('modal-id');
             dataTable.splice(t, 1);
+            jsonInit();
             render.renderTable(dataTable);
         });
 
@@ -196,5 +198,12 @@ TABLEAPP.main = (function () {
         nameField.removeClass('border-error').next().removeClass('visible');
         emailField.removeClass('border-error').next().removeClass('visible');
     });
+
+    function jsonInit() {
+        for (var i = 0; i < dataTable.length; i++) {
+            dataTable[i].id = i;
+        }
+    };
+
 
 })();
