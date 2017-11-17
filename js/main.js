@@ -9,7 +9,7 @@ TABLEAPP.main = (function () {
         addNew = $('#add-new-btn'),
         closeBtn = $('#close'),
         addModalDiv = $('#modal-div'),
-
+        tableBody = $('#table-content'),
         deleteModalDiv = $('#delete-modal-div'),
         searchBtn = $('#search-btn'),
         searchInput = $('#search-input'),
@@ -41,7 +41,7 @@ TABLEAPP.main = (function () {
 
     searchBtn.click(function () {
         var filter, td, tableTr;
-        tableTr = $('#table-content').find('tr');
+        tableTr = tableBody.find('tr');
         filter = searchInput.val().toUpperCase();
         for (var i = 0; i < tableTr.length; i++) {
             td = tableTr[i].getElementsByTagName("td")[0];
