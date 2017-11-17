@@ -2,7 +2,8 @@
 
 TABLEAPP.validation = (function () {
     var nameFieldId = $('#name-add-field'),
-        emailFieldId = $('#email-add-field');
+        emailFieldId = $('#email-add-field'),
+        valTemplate = /(?:^[A-Za-z]+@[A-Za-z]+\.[A-Za-z]{2,}$)/g;
 
     var validation = {
 
@@ -20,7 +21,7 @@ TABLEAPP.validation = (function () {
         },
 
         nameFieldValidation: function (nameFieldId) {
-            if ($(nameFieldId).val() === '') {
+            if (nameFieldId.val() === '') {
                 return validation.showErrors('name');
             } else {
                 return true;
@@ -28,8 +29,7 @@ TABLEAPP.validation = (function () {
         },
 
         emailFieldValidation: function (emailFieldId) {
-            var r = (/(?:^[A-Za-z]+@[A-Za-z]+\.[A-Za-z]{2,}$)/g);
-            if (!r.test($(emailFieldId).val())) {
+            if (!valTemplate.test(emailFieldId.val())) {
                 return validation.showErrors('email');
             } else {
                 return true;

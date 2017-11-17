@@ -1,28 +1,39 @@
 'use strict';
 
 TABLEAPP.main = (function () {
-    var addNew = $('#add-new-btn'),
+    var item,
+        dataTable = TABLEAPP.data.goods,
+        render = TABLEAPP.rendering,
+        sort = TABLEAPP.sorting,
+        validation = TABLEAPP.validation,
+        addNew = $('#add-new-btn'),
         closeBtn = $('#close'),
         addModalDiv = $('#modal-div'),
+
         deleteModalDiv = $('#delete-modal-div'),
         searchBtn = $('#search-btn'),
         searchInput = $('#search-input'),
         table = $('table'),
         yesBtn = $('#yes-btn'),
         noBtn = $('#no-btn'),
-        dataTable = TABLEAPP.data.goods,
-        render = TABLEAPP.rendering,
-        sort = TABLEAPP.sorting,
-        validation = TABLEAPP.validation,
-        nameField = $('#name-add-field'),
-        emailField = $('#email-add-field');
+        nameInputId = $('#name-add-field'),
+        emailInputId = $('#email-add-field'),
+        countInputId = $('#count-add-field'),
+        priceInputId = $('#price-add-field'),
+        addUpdateBtn = $('#add-update-btn'),
+        optionInputId = $('#select'),
 
-    var clickingCases = {
-        delete: 'delete',
-        edit: 'edit',
-        sorting: 'sorting',
-        show: 'show-item'
-    };
+        sortNameArrowId = $('#sort-name-arrow'),
+        sortPriceArrowId = $('#sort-price-arrow'),
+        sortName = 'sort-name-arrow',
+        sortPrice = 'sort-price-arrow',
+
+        clickingCases = {
+            delete: 'delete',
+            edit: 'edit',
+            sorting: 'sorting',
+            show: 'show-item'
+        };
 
     function modalToggle(id) {
         id.toggleClass('modal-visibility');
@@ -45,31 +56,24 @@ TABLEAPP.main = (function () {
     });
 
     addNew.click(function () {
-        var item,
-            nameInputId = $('#name-add-field'),
-            emailInputId = $('#email-add-field'),
-            countInputId = $('#count-add-field'),
-            priceInputId = $('#price-add-field'),
-            addUpdateBtn = $('#add-update-btn'),
-            optionFieldId = $('#select');
 
         addUpdateBtn.text('Add').css('display', 'block');
         nameInputId.val('');
         emailInputId.val('');
         countInputId.val('');
         priceInputId.val('');
-        optionFieldId.val('');
+        optionInputId.val('');
 
         modalToggle(addModalDiv);
 
-        addUpdateBtn.off('click').click(function () {
+        addUpdateBtn.click(function () {
             item = {
                 id: dataTable.length + 1,
                 name: nameInputId.val(),
                 email: emailInputId.val(),
                 count: countInputId.val(),
                 price: priceInputId.val(),
-                option: optionFieldId.val()
+                option: optionInputId.val()
             };
 
             if (validation.nameFieldValidation(nameInputId) && validation.emailFieldValidation(emailInputId)) {
@@ -106,12 +110,7 @@ TABLEAPP.main = (function () {
     });
 
     function sorting(target) {
-        var
-            type = $(target).attr('id'),
-            sortNameArrowId = $('#sort-name-arrow'),
-            sortPriceArrowId = $('#sort-price-arrow'),
-            sortName = 'sort-name-arrow',
-            sortPrice = 'sort-price-arrow';
+        var type = $(target).attr('id');
 
         if (type === sortName) {
             if (!sortNameArrowId.hasClass('sort-arrow-div-clicked')) {
@@ -139,15 +138,7 @@ TABLEAPP.main = (function () {
     function editItem(target) {
 
         addModalDiv.attr('modal-id', $(target).attr('row-id'));
-
-        var nameInputId = $('#name-add-field'),
-            emailInputId = $('#email-add-field'),
-            countInputId = $('#count-add-field'),
-            priceInputId = $('#price-add-field'),
-            optionInputId = $('#select'),
-            addUpdateBtn = $('#add-update-btn'),
-            id = addModalDiv.attr('modal-id');
-
+        var id = addModalDiv.attr('modal-id');
 
         if ($(target).attr('data-action') === 'show-item') {
             addUpdateBtn.css('display', 'none');
@@ -163,7 +154,7 @@ TABLEAPP.main = (function () {
         priceInputId.val(dataTable[id].price);
         optionInputId.val(dataTable[id].option);
 
-        addUpdateBtn.off('click').click(function () {
+        addUpdateBtn.click(function () {
             if (validation.nameFieldValidation(nameInputId) && validation.emailFieldValidation(emailInputId)) {
                 dataTable[id].name = nameInputId.val();
                 dataTable[id].email = emailInputId.val();
@@ -180,7 +171,7 @@ TABLEAPP.main = (function () {
         modalToggle(deleteModalDiv);
         deleteModalDiv.attr('modal-id', $(target).attr('row-id'));
 
-        yesBtn.off('click').click(function () {
+        yesBtn.click(function () {
             modalToggle(deleteModalDiv);
             var t = deleteModalDiv.attr('modal-id');
             dataTable.splice(t, 1);
@@ -188,15 +179,15 @@ TABLEAPP.main = (function () {
             render.renderTable(dataTable);
         });
 
-        noBtn.off('click').click(function () {
+        noBtn.click(function () {
             modalToggle(deleteModalDiv);
         });
     }
 
     closeBtn.click(function () {
         modalToggle(addModalDiv);
-        nameField.removeClass('border-error').next().removeClass('visible');
-        emailField.removeClass('border-error').next().removeClass('visible');
+        nameInputId.removeClass('border-error').next().removeClass('visible');
+        emailInputId.removeClass('border-error').next().removeClass('visible');
     });
 
     function jsonInit() {

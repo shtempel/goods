@@ -4,19 +4,18 @@ TABLEAPP.rendering = (function () {
     var items = TABLEAPP.data.goods,
         render,
         tableBody = $('#table-content'),
-        rowHtml = $('#itemRowTemplate').html();
-
-
-    window.itemRowTempFunc = _.template(rowHtml);
+        tableBodyRows = $('tbody tr'),
+        rowHtml = $('#itemRowTemplate').html(),
+        compiled = _.template(rowHtml);
 
     render = {
 
         newItem: function (item) {
-            return itemRowTempFunc({item: item});
+            return compiled({item: item});
         },
 
         renderTable: function (items) {
-            $('tbody tr').remove();
+            tableBodyRows.remove();
             var newArr = [];
             _.each(items, function (item) {
                 var itemHtml = render.newItem(item);

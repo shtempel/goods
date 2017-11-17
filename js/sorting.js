@@ -5,29 +5,22 @@ TABLEAPP.sorting = (function () {
 
         nameSorting: function (json) {
             json.sort(function (a, b) {
-                var x = a.name.toLowerCase();
-                var y = b.name.toLowerCase();
-                if (x < y) {
+                if (a.name.toLowerCase() < b.name.toLowerCase()) {
                     return -1;
-                }
-                if (x > y) {
+                } else {
                     return 1;
                 }
-                return 0;
+
             });
         },
 
         nameReverseSorting: function (json) {
             json.sort(function (a, b) {
-                var x = a.name.toLowerCase();
-                var y = b.name.toLowerCase();
-                if (x > y) {
+                if (a.name.toLowerCase() > b.name.toLowerCase()) {
                     return -1;
+                } else {
+                    return 1
                 }
-                if (x < y) {
-                    return 1;
-                }
-                return 0;
             });
         },
 
